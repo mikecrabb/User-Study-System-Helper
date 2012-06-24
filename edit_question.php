@@ -1,8 +1,7 @@
-<? $questionID=$_GET["qno"] ?>
-
 <?php include ("header.php"); ?>
 <?php include ("db_connect.php"); ?>
 
+<? $questionID=$_GET["qno"] ?>
 <? $result = mysql_query("SELECT * FROM questions WHERE questionID = '".$questionID."'");
 while($row = mysql_fetch_array($result))
   {
@@ -13,12 +12,17 @@ while($row = mysql_fetch_array($result))
   $secondaryNavigation = $row['secondaryNavigation'];
   $navPlacement = $row['navPlacement'];
   $navStructure = $row['navStructure'];
-  $siteMap = $row['siteMap'];
+  $sitemap = $row['siteMap'];
   $breadcrumbs = $row['breadcrumbs'];
-  $w3cvalidhtml = $row['w3cvalidhtml'];
-  $w3cvalidcss = $row['w3cvalidcss'];
-  $readability = $row['readability'];
+  $validhtml = $row['w3cvalidhtml'];
+  $validcss = $row['w3cvalidcss'];
+  $fleshkincaid = $row['fleshkincaid'];
   $searchbox = $row['searchbox'];
+  $sentenceonpage = $row['sentenceonpage'];
+  $wordsonpage = $row['wordsonpage'];
+  $syllablesonpage = $row['syllablesonpage'];
+  $wordspersentence = $row['wordspersentence'];
+  $syllablesperword = $row['syllablesperword'];
   }
 ?>
 <div id="details">
@@ -34,60 +38,89 @@ while($row = mysql_fetch_array($result))
 <table id="detailstable">
 	<tbody>
 		<tr>
-			<th>Primary Navigation</th>
-			<td width="25%"><input type="text" name="primaryNav" size="5" value="<? echo $primaryNavigation ?>"/></td>
-
+			<th>Readability</th>
 		</tr>
 		<tr>
-			<th>Secondary Navigation</th>
-			<td><input type="text" name="secondaryNav" size="5" value="<? echo $secondaryNavigation ?>"/></td>
-
+			<td>Sentences on Page</td>
+			<td width="25%"><input type="text" name="sentenceonpage" size="5" value="<? echo $sentenceonpage ?>"/></td>
 		</tr>
 		<tr>
-			<th>Nav. Placement Consistancy</th>
-			<td><input type="text" name="navPlacement" size="5" value="<? echo $navPlacement ?>"/></td>
+			<td>Words on Page</td>
+			<td><input type="text" name="wordsonpage" size="5" value="<? echo $wordsonpage ?>"/></td>
 		</tr>
 		<tr>
-			<th>Nav. Structure Consistancy</th>
-			<td><input type="text" name="navConsistancy" size="5" value="<? echo $navStructure ?>"/></td>
+			<td>Syllables on Page</td>
+			<td><input type="text" name="syllablesonpage" size="5" value="<? echo $syllablesonpage ?>"/></td>
+		</tr>
+		<tr>
+			<td>Avg. Words Per Sentence</td>
+			<td><input type="text" name="wordspersentence" size="5" value="<? echo $wordspersentence ?>"/></td>
+		</tr>
+		<tr>
+			<td>Avg. Syllables Per Word</td>
+			<td><input type="text" name="syllablesperword" size="5" value="<? echo $syllablesperword ?>"/></td>
+		</tr>
+		<tr>
+			<td>Flesh Kincaid Score</td>
+			<td><input type="text" name="fleshkincaid" size="5" value="<? echo $fleshkincaid ?>"/></td>
 		</tr>
 		</tbody>
 		</table>
-		</br>
-		
-		<table id="detailstable">
-		<tbody>
-		<tr>
-			<th>Site Map</th>
-			<td width="25%"><input type="text" name="siteMap" size="5" value="<? echo $siteMap ?>"/></td>
+		<br/>
+
+<table id="detailstable">
+	<tbody>
+	<tr>
+			<th>Navigation Structure</th>
 		</tr>
 		<tr>
-			<th>Search Box</th>
-			<td><input type="text" name="searchyBox" size="5" value="<? echo $searchbox ?>"/></td>
+			<td>Primary Navigation</td>
+			<td width="25%"><input type="text" name="primaryNavigation" size="5" value="<? echo $primaryNavigation ?>"/></td>
 		</tr>
 		<tr>
-			<th>Breadcrumbs</th>
+			<td>Secondary Navigation</td>
+			<td><input type="text" name="secondaryNavigation" size="5" value="<? echo $primaryNavigation ?>"/></td>
+
+		</tr>
+		<tr>
+			<td>Nav. Placement Consistency</td>
+			<td><input type="text" name="navPlacement" size="5" value="<? echo $navPlacement ?>"/></td>
+		</tr>
+		<tr>
+			<td>Nav. Structure Consistency</td>
+			<td><input type="text" name="navStructure" size="5" value="<? echo $navStructure ?>"/></td>
+		</tr>
+		<tr>
+			<td>Site Map Present</td>
+			<td width="25%"><input type="text" name="sitemap" size="5" value="<? echo $sitemap ?>"/></td>
+		</tr>
+		<tr>
+			<td>Search Box Present</td>
+			<td><input type="text" name="searchbox" size="5" value="<? echo $searchbox ?>"/></td>
+		</tr>
+		<tr>
+			<td>Breadcrumbs Present</td>
 			<td><input type="text" name="breadcrumbs" size="5" value="<? echo $breadcrumbs ?>"/></td>
 		</tr>
-	</tbody>
-</table>
-</br>
+		</tbody>
+		</table>
+		<br/>
 		
 		<table id="detailstable">
 		<tbody>
 		<tr>
-			<th>Readability (Flesch Kincaid)</th>
-			<td width="25%"><input type="text" name="readability" size="5" value="<? echo $readability ?>" /></td>
+			<th>Validity</th>
 		</tr>
 		<tr>
-			<th>W3C Valid HTML</th>
-			<td><input type="text" name="w3cvalidhtml" size="5" value="<? echo $w3cvalidhtml ?>"/></td>
+			<td>W3C Valid HTML</td>
+			<td td width="25%"><input type="text" name="validhtml" size="5" value="<? echo $validhtml ?>"/></td>
 		</tr>
 		<tr>
-			<th>W3C Valid CSS</th>
-			<td><input type="text" name="w3cvalidcss" size="5" value="<? echo $w3cvalidcss ?>"/></td>
+			<td>W3C Valid CSS</td>
+			<td><input type="text" name="validcss" size="5" value="<? echo $validcss ?>"/></td>
 		</tr>
 	</tbody>
 </table>
+
 <input type="submit" class="submitbutton" value="Submit">
 </div>

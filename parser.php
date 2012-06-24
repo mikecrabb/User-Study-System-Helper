@@ -1,6 +1,83 @@
 <?php
+/* FUNCTION DESCRIPTIONS
 
-if (isset($_POST['Submit'])) {
+////////////////////////////////////////////
+tagcounter($link, $tagtype, $identifier)
+
+$link - web address
+$tagtype - type of tag you are looking for
+$identifier - identifying feature of this tag
+
+RETURN - number
+
+////////////////////////////////////////////
+strip_everything($link)
+
+$link - web address
+
+RETURN - text from a web page
+
+////////////////////////////////////////////
+words_on_page($link)
+
+$link - web address
+
+RETURN - number of words on a page
+
+////////////////////////////////////////////
+sentence_on_page($link)
+
+$link - web address
+
+RETURN - number of sentences on a page
+
+////////////////////////////////////////////
+linkdensity($link)
+
+($link) - web address
+
+RETURN - ratio of links to words on a page
+
+////////////////////////////////////////////
+total_syllables($link)
+
+$link - web address
+
+RETURN - number of syllables on a page
+
+////////////////////////////////////////////
+flesh_reading_ease($link)
+
+$link - web address
+
+RETURN = Flesh Reading Score, to 2 decimal points
+
+////////////////////////////////////////////
+function words_per_sentence($link)
+
+$link - web address
+
+RETURN - Average words per sentence on a page
+
+////////////////////////////////////////////
+function syllables_per_word($link)
+
+$link - web address
+
+RETURN - average syllables per word
+
+////////////////////////////////////////////
+function sitemap_present($link)
+
+$link - web address
+
+RETURN - BINARY of site map link present on web page
+
+////////////////////////////////////////////
+
+
+
+*/
 
 include ("syllable_counter.php");
 
@@ -68,7 +145,7 @@ function sentences_on_page($link)
 		return preg_match_all('/[^\s](\.|\!|\?)(?!\w)/',$str,$match);
 	}
 	
-	function linkdensity($link)
+function linkdensity($link)
 	{
 		 $words = words_on_page($link);
 		 $urls = tagcounter($link, 'a', 'href');
@@ -124,45 +201,4 @@ function sitemap_present($link)
     	return 0;
 	}
 }
-
-
-
-$link=$_POST["address"];
-
-		echo "You are looking at ". $link. "<br/>";
-		
-		echo "<h3>Reading Information</h3>";
-		
-		echo "There are ". words_on_page($link) ." words on the page<br/>";
-        
-        echo "There are ". sentences_on_page($link) . " sentences on the page<br/>";
-        
-        echo "There are ". total_syllables($link) . " syllables on the page<br/>";
-        
-        echo "There is an average of ". words_per_sentence($link) . " words per sentance</br>";
-        
-        echo "There is an average of ". syllables_per_word($link) . " syllables per word</br>";
-        
-        echo "The reading ease of the webpage is <strong>" . flesh_reading_ease($link) . "</strong><br/>";
-        
-        echo "<h3>Navigational Information</h3>";
-
-    	echo "There are ". tagcounter($link, 'div', 'id') . " divs on the page</br>";
-    	
-    	echo "There are ". tagcounter($link, 'img', 'src') ." images on the page<br/>";
-
-        echo "There are ". tagcounter($link, 'a', 'href') ." links on the page<br/>";
-        
-        echo "The link density is ". linkdensity($link) . " words per link<br/>";
-        
-        echo "Sitemap rating is " . sitemap_present($link) . "</br>";
-        
-
-
-}
 ?>
-<br /><br />
-<form action="" method="post" enctype="multipart/form-data" name="link">
-<input name="address" type="text" value="" />
-<input name="Submit" type="Submit" />
-</form>

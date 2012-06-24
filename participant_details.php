@@ -2,6 +2,7 @@
 <?php include ("db_connect.php"); ?>
 
 <? $userID=$_GET["id"] ?>
+<? $showname=$_POST["showname"] ?>
 
 <? $result = mysql_query("SELECT * FROM participants WHERE userID = '".$userID."'");
 while($row = mysql_fetch_array($result))
@@ -14,7 +15,16 @@ while($row = mysql_fetch_array($result))
   $longMem = $row['longMemory'];
   $intUsage = $row['intUsage'];
   $userName = $row['userName'];
+  
+  if ($showname=="yes")
+  {
+  $displayName = $username;
+  }
+  else
+  {
   $displayName = "xxxxxx";
+  }
+
   $databaseNumber = $row['userDatabaseNumber'];
   $CMD = $row['CMDate'];
   $CMC = $row['CMComplete'];
@@ -29,7 +39,11 @@ while($row = mysql_fetch_array($result))
   }
 ?>
 <div id="details">
-<h1><? echo $displayName; ?></h1>
+<h1><? echo $displayName; ?>
+<form name="showname" action="showname.php" method="post">
+<input name="userID" type="hidden" value="<? echo $userID ?>">
+<input type="submit" class="submitbutton2" value="Show Name"></h1>
+
 <h2>Database No: <? echo $databaseNumber ?></h2>
 <p><strong>Cognitive Measures Date</strong>: <? echo $CMD ?></p>
 <p><strong>Study Date</strong>: <? echo $SD ?></p>

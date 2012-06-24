@@ -11,12 +11,17 @@ while($row = mysql_fetch_array($result))
   $secondaryNavigation = $row['secondaryNavigation'];
   $navPlacement = $row['navPlacement'];
   $navStructure = $row['navStructure'];
-  $siteMap = $row['siteMap'];
+  $sitemap = $row['siteMap'];
   $breadcrumbs = $row['breadcrumbs'];
   $w3cvalidhtml = $row['w3cvalidhtml'];
   $w3cvalidcss = $row['w3cvalidcss'];
-  $readability = $row['readability'];
+  $fleshkincaid = $row['fleshkincaid'];
   $searchbox = $row['searchbox'];
+  $sentenceonpage = $row['sentenceonpage'];
+  $wordsonpage = $row['wordsonpage'];
+  $syllablesonpage = $row['syllablesonpage'];
+  $wordspersentence = $row['wordspersentence'];
+  $syllablesperword = $row['syllablesperword'];
   }
 ?>
 <div id="details">
@@ -30,61 +35,93 @@ while($row = mysql_fetch_array($result))
 <table id="detailstable">
 	<tbody>
 		<tr>
-			<th>Primary Navigation</th>
-			<td width="25%"><? echo $primaryNavigation; ?></td>
+			<th>Readability</th>
 
 		</tr>
 		<tr>
-			<th>Secondary Navigation</th>
+			<td>Sentences on Page</td>
+			<td width="25%"><? echo $sentenceonpage; ?></td>
+		</tr>
+		<tr>
+			<td>Words on Page</td>
+			<td><? echo $wordsonpage; ?></td>
+		</tr>
+		<tr>
+			<td>Syllables on Page</td>
+			<td><? echo $syllablesonpage; ?></td>
+		</tr>
+		<tr>
+			<td>Avg. Words Per Sentence</td>
+			<td><? echo $wordspersentence; ?></td>
+		</tr>
+		<tr>
+			<td>Avg. Syllables Per Word</td>
+			<td><? echo $syllablesperword; ?></td>
+		</tr>
+		<tr>
+			<td>Flesh Kincaid Score</td>
+			<td><? echo $fleshkincaid; ?></td>
+		</tr>
+		</tbody>
+		</table>
+		<br/>
+
+<table id="detailstable">
+	<tbody>
+	<tr>
+			<th>Navigation Structure</th>
+		</tr>
+		<tr>
+			<td>Primary Navigation</td>
+			<td width="25%"><? echo $primaryNavigation; ?></td>
+		</tr>
+		<tr>
+			<td>Secondary Navigation</td>
 			<td><? echo $secondaryNavigation; ?></td>
 
 		</tr>
 		<tr>
-			<th>Nav. Placement Consistancy</th>
+			<td>Nav. Placement Consistency</td>
 			<td><? echo $navPlacement; ?></td>
 		</tr>
 		<tr>
-			<th>Nav. Structure Consistancy</th>
+			<td>Nav. Structure Consistency</td>
 			<td><? echo $navStructure; ?></td>
 		</tr>
-		</tbody>
-		</table>
-		</br>
-		
-		<table id="detailstable">
-		<tbody>
 		<tr>
-			<th>Site Map</th>
-			<td width="25%"><? echo $siteMap; ?></td>
+			<td>Site Map Present</td>
+			<td width="25%"><? echo $sitemap; ?></td>
 		</tr>
 		<tr>
-			<th>Search Box</th>
+			<td>Search Box Present</td>
 			<td><? echo $searchbox; ?></td>
 		</tr>
 		<tr>
-			<th>Breadcrumbs</th>
+			<td>Breadcrumbs Present</td>
 			<td><? echo $breadcrumbs; ?></td>
 		</tr>
-	</tbody>
-</table>
-</br>
+		</tbody>
+		</table>
+		<br/>
 		
 		<table id="detailstable">
 		<tbody>
 		<tr>
-			<th>Readability (Flesch Kincaid)</th>
-			<td width="25%"><? echo $readability; ?></td>
+			<th>Validity</th>
 		</tr>
 		<tr>
-			<th>W3C Valid HTML</th>
-			<td><? echo $w3cvalidhtml; ?></td>
+			<td>W3C Valid HTML</td>
+			<td td width="25%"><? echo $w3cvalidhtml; ?></td>
 		</tr>
 		<tr>
-			<th>W3C Valid CSS</th>
+			<td>W3C Valid CSS</td>
 			<td><? echo $w3cvalidcss; ?></td>
 		</tr>
 	</tbody>
 </table>
 
-<p><a href="edit_question.php?qno=<? echo $questionID; ?>">Edit...</a></p>
+<p><a href="edit_question.php?qno=<? echo $questionID; ?>">Edit...</a>
+<form name="autofillform" action="question_autofill.php" method="post">
+<input name="questionID" type="hidden" value="<? echo $questionID ?>"> 
+<input type="submit" class="submitbutton" value="AutoFill"></p>
 </div>
