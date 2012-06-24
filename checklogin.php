@@ -10,8 +10,7 @@ $checker=0;
 //SQL injection protect fields
 $password = mysql_real_escape_string($_POST["password"]);
 $username = mysql_real_escape_string($_POST["username"]);
-
-//Check that a username has been entered
+$password = md5($password);
 if ($username=="")
 {
 $checker=1;
@@ -24,11 +23,11 @@ $checker=1;
 }
 
 //Check that username matches password
-
-//$result = mysql_query("SELECT * FROM table WHERE username= '".$username."'");
-//while($row = mysql_fetch_array($result))
-
-	if ($password == "ve9caac8faaf8")
+$result = mysql_query("SELECT * FROM systemusers WHERE userName= '".$username."'");
+while($row = mysql_fetch_array($result))
+{
+$checker=1;
+	if ($password == $row['password'])
 	{
 	$checker=2;
 	}
@@ -36,15 +35,7 @@ $checker=1;
 	{
 	$checker=1;
 	}
-	
-	if ($username == "mikecrabb") //Three strike system check
-	{
-		$checker=2;
-	}
-	else
-	{
-	$checker=1;
-	}
+}
 
 //Page Redirect
 header ("Location: $URL");
