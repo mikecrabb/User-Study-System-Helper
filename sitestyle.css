@@ -12,7 +12,7 @@ header {
 	background-color: #f2f2f2;
 }
 
-h1, h2, h3, p {
+h1, h2, h3, h4, p {
 	font-family: Roboto;
 	color: #444;
 	font-weight: 100;
@@ -29,6 +29,10 @@ h2, #pnumber {
 
 h3, #qweb {
 	font-size: 20px;
+}
+
+h4 {
+	font-size: 15px;
 }
 
 #number {
@@ -90,6 +94,62 @@ width:300px;
 	padding: 1px 5px;
 	font-size: 14px;
 }
+
+#disorientation{
+	padding: 1px 5px;
+	float:left;
+		border-style:dotted;
+	border-width:1px;
+	margin-bottom:5px;
+
+}
+#disorientation_rc{
+	padding: 1px 5px;
+	float:right;
+	border-style:dotted;
+	border-width:1px;
+	margin-bottom:5px;
+
+}
+
+#easeofuse{
+	padding: 1px 5px;
+	float:left;
+		border-style:dotted;
+	border-width:1px;
+	margin-bottom:5px;
+
+}
+#easeofuse_rc{
+	padding: 1px 5px;
+	float:right;
+		border-style:dotted;
+	border-width:1px;
+	margin-bottom:5px;
+
+}
+
+#infobox{
+	padding: 1px 5px;
+	float:right;
+		border-style:dotted;
+	border-width:1px;
+	margin-bottom:5px;
+	width:330px;
+	height: 200px;
+
+}
+
+#previsit{
+	padding: 1px 5px;
+	float:left;
+		border-style:dotted;
+	border-width:1px;
+	margin-bottom:5px;
+
+}
+
+
 #detailstable th {
 	text-align: left;
 	border-bottom: 1px solid #fff;

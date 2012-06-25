@@ -23,6 +23,11 @@ while($row = mysql_fetch_array($result))
   $syllablesonpage = $row['syllablesonpage'];
   $wordspersentence = $row['wordspersentence'];
   $syllablesperword = $row['syllablesperword'];
+  $divs = $row['divs'];
+  $images = $row['images'];
+  $links = $row['links'];
+  $linkdensity = $row['linkdensity'];
+  $accessibilitymention = $row['accessibilitymention'];
   }
 ?>
 <div id="details">
@@ -105,7 +110,37 @@ while($row = mysql_fetch_array($result))
 		</tbody>
 		</table>
 		<br/>
-		
+
+		<table id="detailstable">
+		<tbody>
+		<tr>
+			<th>Page Metrics</th>
+		</tr>
+		<tr>
+			<td>DIVS on page</td>
+			<td td width="25%"><input type="text" name="divs" size="5" value="<? echo $divs ?>"/></td>
+		</tr>
+		<tr>
+			<td>Images on page</td>
+			<td><input type="text" name="images" size="5" value="<? echo $images ?>"/></td>
+		</tr>
+		<tr>
+			<td>Links on page</td>
+			<td><input type="text" name="links" size="5" value="<? echo $links ?>"/></td>
+		</tr>
+		<tr>
+			<td>Link Density</td>
+			<td><input type="text" name="linkdensity" size="5" value="<? echo $linkdensity ?>"/></td>
+		</tr>
+		<tr>
+			<td>Accessibility Mentioned</td>
+			<td><input type="text" name="accessibilitymention" size="5" value="<? echo $accessibilitymention ?>"/></td>
+		</tr>
+	</tbody>
+</table>
+<br/>
+
+
 		<table id="detailstable">
 		<tbody>
 		<tr>

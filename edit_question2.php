@@ -17,6 +17,11 @@ $wop= $_POST["wordsonpage"];
 $sop2= $_POST["syllablesonpage"];
 $wps= $_POST["wordspersentence"];
 $spw= $_POST["syllablesperword"];
+  $divs = $_POST['divs'];
+  $images = $_POST['images'];
+  $links = $_POST['links'];
+  $linkdensity = $_POST['linkdensity'];
+  $accessibilitymention = $_POST['accessibilitymention'];
 
 include ("db_connect.php");
 
@@ -36,7 +41,12 @@ breadcrumbs='" . $bc . "',
 w3cvalidhtml='" . $wh . "',
 w3cvalidcss='" . $wc . "',
 fleshkincaid='" . $fk . "',
-searchbox='" . $searchbox . "'
+searchbox='" . $searchbox . "',
+divs='" . $divs . "',
+images='" . $images . "',
+links='" . $links . "',
+linkdensity='" . $linkdensity . "',
+accessibilitymention='" . $accessibilitymention . "'
 WHERE questionID = '" . $questionID . "'");
 
 

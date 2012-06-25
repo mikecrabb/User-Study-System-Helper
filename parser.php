@@ -74,7 +74,20 @@ $link - web address
 RETURN - BINARY of site map link present on web page
 
 ////////////////////////////////////////////
+function searchbox_present($link)
 
+$link - web address
+
+RETURN - BINARY of search box present on web page
+
+////////////////////////////////////////////
+function accessibility_mention($link)
+
+$link - web address
+
+RETURN - BINARY of mention of accessibility on web page
+
+////////////////////////////////////////////
 
 
 */
@@ -176,7 +189,7 @@ function total_syllables($link)
 function flesh_reading_ease($link)
 {
 	$readingease= 206.835 - 1.015*(words_per_sentence($link)) - 84*(syllables_per_word($link));
-	$readingease = round($readingease , 2);
+	$readingease = abs(round($readingease , 2));
 	return $readingease;	
 }
 
@@ -193,6 +206,44 @@ function syllables_per_word($link)
 function sitemap_present($link)
 {
 	if (preg_match("/map/", strip_everything($link)))
+	{
+    	return 1;
+    }
+    	else
+    {
+    	return 0;
+	}
+}
+
+function searchbox_present($link)
+{
+	if (preg_match("/search/", strip_everything($link)))
+	{
+    	return 1;
+    }
+    	else
+    {
+    	return 0;
+	}
+}
+
+function accessibility_mention($link)
+{
+	if (preg_match("/accessibility/", strip_everything($link)))
+	{
+    	return 1;
+    }
+    	else
+    {
+    	return 0;
+	}
+}
+
+function check_valid($link)
+{
+$link = "http://validator.w3.org/check?uri=". $link;
+
+if (preg_match("/Passed/", strip_everything($link)))
 	{
     	return 1;
     }
