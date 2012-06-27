@@ -97,11 +97,11 @@ while($row = mysql_fetch_array($result))
 		</tr>
 		<tr>
 			<td>Site Map Present</td>
-			<td width="25%"><? if ($sitemap == 1){ echo "Yes";}elseif ($sitemap == 0){echo "No";} ?></td>
+			<td width="25%"><? if ($sitemap == 1){ echo "Yes";}if ($sitemap == '0'){echo "No";} ?></td>
 		</tr>
 		<tr>
 			<td>Search Box Present</td>
-			<td><? if ($searchbox == 1){ echo "Yes";}elseif ($searchbox == 0){echo "No";} ?></td>
+			<td><? if ($searchbox == 1){ echo "Yes";}if ($searchbox == '0'){echo "No";} ?></td>
 		</tr>
 		<tr>
 			<td>Breadcrumbs Present</td>
@@ -134,7 +134,7 @@ while($row = mysql_fetch_array($result))
 		</tr>
 		<tr>
 			<td>Accessibility Mentioned</td>
-			<td><? if ($accessibilitymention == 1){ echo "Yes";}elseif ($accessibilitymention == 0){echo "No";} ?></td>
+			<td><? if ($accessibilitymention == 1){ echo "Yes";}if ($accessibilitymention == '0'){echo "No";} ?></td>
 		</tr>
 	</tbody>
 </table>
@@ -147,11 +147,11 @@ while($row = mysql_fetch_array($result))
 		</tr>
 		<tr>
 			<td>W3C Valid HTML</td>
-			<td td width="25%"><? if ($w3cvalidhtml == 1){ echo "Yes";}elseif ($w3cvalidhtml == 0){echo "No";} ?></td>
+			<td td width="25%"><? if ($w3cvalidhtml == 1){ echo "Yes";}if ($w3cvalidhtml == '0'){echo "No";} ?></td>
 		</tr>
 		<tr>
 			<td>W3C Valid CSS</td>
-			<td><? if ($w3cvalidcss == 1){ echo "Yes";}elseif ($w3cvalidcss == 0){echo "No";} ?></td>
+			<td><? if ($w3cvalidcss == 1){ echo "Yes";}if ($w3cvalidcss == '0'){echo "No";} ?></td>
 		</tr>
 	</tbody>
 </table>

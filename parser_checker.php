@@ -27,6 +27,8 @@ $link=$_POST["address"];
     	echo "There are ". tagcounter($link, 'div', 'id') . " divs on the page</br>";
     	
     	echo "There are ". tagcounter($link, 'img', 'src') ." images on the page<br/>";
+    	
+    	echo "There are ". tagcounter($link, 'img', 'alt') ." alt tagged images on the page<br/>";
 
         echo "There are ". tagcounter($link, 'a', 'href') ." links on the page<br/>";
         
