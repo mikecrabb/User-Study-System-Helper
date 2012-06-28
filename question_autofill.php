@@ -8,6 +8,19 @@ while($row = mysql_fetch_array($result))
   {
   $questionWebsite = $row['questionWebsite'];
   }
+$questionWebsite = "http://" . $questionWebsite;
+
+$result = mysql_query("SELECT * FROM website_characteristics WHERE testableFunction IS NOT NULL");
+while($row = mysql_fetch_array($result))
+  {
+  $id = $row['characteristicID'];
+  $functiontest = $row['testableFunction'];
+  $functionresult = eval($functiontest);
+  mysql_query("INSERT INTO page_characteristics ( characteristicID, characteristicValue, urlID) VALUES ('" . $id . "', '" . $functionresult . "', '" . $urlID . "')")
+  
+  
+  $questionWebsite = $row['questionWebsite'];
+  }  
   
   
 $webaddress = "http://" . $questionWebsite;

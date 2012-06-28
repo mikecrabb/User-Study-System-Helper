@@ -1,4 +1,5 @@
 <?php
+gc_enable(); // Enable Garbage Collector
 include ("simple_html_dom.php"); // Acknowledge: Jose Solorzano (https://sourceforge.net/projects/php-html/)
 include ("syllable_counter.php"); // Acknowledge: http://www.russellmcveigh.info/maintenance.php
 
@@ -21,6 +22,13 @@ function tagcounter($link, $tagtype, $identifier)
 		$ret = count($ret);
         return $ret;
     }
+
+function kill_dom()
+{
+//Whatever did Dom do to you!?
+unset($GLOBALS['dom']);
+unset($GLOBALS['text']);
+}
 		
 function strip_everything($link)
 {
@@ -148,4 +156,26 @@ if (preg_match("/Passed/", strip_everything($link)))
     	return 0;
 	}
 }
+function get_website_data($tableID)
+{
+$result = mysql_query("SELECT * FROM urls WHERE tableid = '" . $tableID . "'");
+while($row = mysql_fetch_array($result))
+{
+$webaddress = $row['url'];
+}
+$result = mysql_query("SELECT * FROM website_characteristics WHERE testableFunction != ''");
+//$result = mysql_query("SELECT * FROM website_characteristics WHERE characteristicName = 'wordsonpage'");
+while($row = mysql_fetch_array($result))
+  {
+  $codetorun = $row['testableFunction'];
+  $charicteristicName = $row['characteristicName'];
+  eval("\$myanswer = $codetorun".";");
+  
+  echo "<td>"; 
+  echo $myanswer;
+
+echo "</td>";
+  }  
+}
+
 ?>
