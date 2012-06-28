@@ -2,7 +2,8 @@
 <?php include ("db_connect.php"); ?>
 
 <? $userID=$_GET["id"] ?>
-<? $showname=$_POST["showname"] ?>
+<? $qID=$_GET["qID"] ?>
+
 
 <? $result = mysql_query("SELECT * FROM participants WHERE userID = '".$userID."'");
 while($row = mysql_fetch_array($result))
@@ -48,7 +49,22 @@ while($row = mysql_fetch_array($result))
 <p><strong>Cognitive Measures Date</strong>: <? echo $CMD ?></p>
 <p><strong>Study Date</strong>: <? echo $SD ?></p>
 
-<?php include ("participant_questions.php"); ?>
+<?php 
+
+if (isset($qID))
+{
+include ("participant_question_info.php");
+}
+else
+{
+include ("participant_questions.php");
+}
+
+?>
+
+
+
+
   </div>
   
   <div id="chart">

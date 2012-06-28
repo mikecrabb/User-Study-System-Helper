@@ -157,7 +157,8 @@ while($row = mysql_fetch_array($result))
 </table>
 
 <p><a href="edit_question.php?qno=<? echo $questionID; ?>">Edit...</a>
-<form name="autofillform" action="question_autofill.php" method="post">
-<input name="questionID" type="hidden" value="<? echo $questionID ?>"> 
+
+<form name="autofillform" action="question_autofill.php" method="post" >
+<input name="questionID" type="hidden" value="<? echo $questionID ?>">
 <input type="submit" class="submitbutton" value="AutoFill"></p>
 </div>

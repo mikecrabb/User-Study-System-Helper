@@ -1,105 +1,17 @@
 <?php
-/* FUNCTION DESCRIPTIONS
-
-////////////////////////////////////////////
-tagcounter($link, $tagtype, $identifier)
-
-$link - web address
-$tagtype - type of tag you are looking for
-$identifier - identifying feature of this tag
-
-RETURN - number
-
-////////////////////////////////////////////
-strip_everything($link)
-
-$link - web address
-
-RETURN - text from a web page
-
-////////////////////////////////////////////
-words_on_page($link)
-
-$link - web address
-
-RETURN - number of words on a page
-
-////////////////////////////////////////////
-sentence_on_page($link)
-
-$link - web address
-
-RETURN - number of sentences on a page
-
-////////////////////////////////////////////
-linkdensity($link)
-
-($link) - web address
-
-RETURN - ratio of links to words on a page
-
-////////////////////////////////////////////
-total_syllables($link)
-
-$link - web address
-
-RETURN - number of syllables on a page
-
-////////////////////////////////////////////
-flesh_reading_ease($link)
-
-$link - web address
-
-RETURN = Flesh Reading Score, to 2 decimal points
-
-////////////////////////////////////////////
-function words_per_sentence($link)
-
-$link - web address
-
-RETURN - Average words per sentence on a page
-
-////////////////////////////////////////////
-function syllables_per_word($link)
-
-$link - web address
-
-RETURN - average syllables per word
-
-////////////////////////////////////////////
-function sitemap_present($link)
-
-$link - web address
-
-RETURN - BINARY of site map link present on web page
-
-////////////////////////////////////////////
-function searchbox_present($link)
-
-$link - web address
-
-RETURN - BINARY of search box present on web page
-
-////////////////////////////////////////////
-function accessibility_mention($link)
-
-$link - web address
-
-RETURN - BINARY of mention of accessibility on web page
-
-////////////////////////////////////////////
-
-
-*/
-
-include ("syllable_counter.php");
+include ("simple_html_dom.php"); // Acknowledge: Jose Solorzano (https://sourceforge.net/projects/php-html/)
+include ("syllable_counter.php"); // Acknowledge: http://www.russellmcveigh.info/maintenance.php
 
 function tagcounter($link, $tagtype, $identifier)
     {   
+    	global $dom;
+    	if (!isset($dom))
+    	{
         $ret = array(); // returns an array
         $dom = new domDocument; // sets up a new dom object
         @$dom->loadHTML(file_get_contents($link)); // gets the html of the page while supressing any errors
         $dom->preserveWhiteSpace = false; // does not preserve whitespaces in the html
+        }
         $links = $dom->getElementsByTagName($tagtype); // polls the links in the page and stores them as "$links"
         // Loop for walking through each "a" tag and looking for href to make sure it's a link
         foreach ($links as $tag)
@@ -109,48 +21,32 @@ function tagcounter($link, $tagtype, $identifier)
 		$ret = count($ret);
         return $ret;
     }
-	
+		
 function strip_everything($link)
 {
-	$stripper = strip_tags(strip_html_tags($link));
-	return $stripper;
-}	
+		global $text;
+	if (!isset($text))
+	{
+		$text = file_get_html($link)->plaintext;
+	}
+	return $text;
+}
+
+function strip_everything_keep_tags($link)
+{
+		global $textandtag;
+	if (!isset($textandtag))
+	{
+		$textandtag = file_get_html($link);
+	}
+	return $textandtag;
+}
 
 function words_on_page($link)
 	{
 		$wordcount=count(str_word_count(strip_everything($link), 1));
 		return $wordcount;
 	}	
-
-function strip_html_tags($link) 
-{ 
-	$text = file_get_contents($link);
-    $text = preg_replace( 
-        array( 
-          // Remove invisible content 
-            '@<head[^>]*?>.*?</head>@siu', 
-            '@<style[^>]*?>.*?</style>@siu', 
-            '@<script[^>]*?.*?</script>@siu', 
-            '@<object[^>]*?.*?</object>@siu', 
-            '@<embed[^>]*?.*?</embed>@siu', 
-            '@<applet[^>]*?.*?</applet>@siu', 
-            '@<noframes[^>]*?.*?</noframes>@siu', 
-            '@<noscript[^>]*?.*?</noscript>@siu', 
-            '@<noembed[^>]*?.*?</noembed>@siu', 
-          // Add line breaks before and after blocks 
-            '@</?((address)|(blockquote)|(center)|(del))@iu', 
-            '@</?((div)|(h[1-9])|(ins)|(isindex)|(p)|(pre))@iu', 
-            '@</?((dir)|(dl)|(dt)|(dd)|(li)|(menu)|(ol)|(ul))@iu', 
-            '@</?((table)|(th)|(td)|(caption))@iu', 
-            '@</?((form)|(button)|(fieldset)|(legend)|(input))@iu', 
-            '@</?((label)|(select)|(optgroup)|(option)|(textarea))@iu', 
-            '@</?((frameset)|(frame)|(iframe))@iu', 
-        ), 
-        array( 
-            ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',"$0", "$0", "$0", "$0", "$0", "$0","$0", "$0",), $text ); 
-
-    return $text; 
-} 
 		
 function sentences_on_page($link)
 	{

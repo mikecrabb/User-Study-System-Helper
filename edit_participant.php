@@ -19,6 +19,11 @@ while($row = mysql_fetch_array($result))
   $CMC = $row['CMComplete'];
   $SD = $row['SDate'];
   $SDC = $row['SComplete'];
+  
+    $fluid2=$fluid / 30 * 100;
+  $longMem2=$longMem / 20 * 100;
+  $shortMem2=$shortMem / 14 * 100;
+  $processing2=$processing / 96 * 100;
   }
 ?>
 
@@ -35,27 +40,27 @@ while($row = mysql_fetch_array($result))
   <div id="chart">
   <?
 //Show Google Chart
-  echo "<img src=\"http://chart.apis.google.com/chart?chxl=0:|Fluid|Processing|Short+Term|Long+Term|Net+Use|Net+Conf&chxt=x,y&chs=300x300&cht=r&chco=FF0000&chd=t:" . $fluid. "," . $processing. "," . $shortMem. "," . $longMem. "," . $intUsage. "," . $crystallized. "," . $fluid. "&chdlp=l&chg=-1,0,0,4&chls=1.333&chm=B,FF000098,0,0,0&chtt=User+Details\" width=\"300\" height=\"300\" alt=\"User Details\" />";   
+  echo "<img src=\"http://chart.apis.google.com/chart?chxl=0:|Fluid|Processing|Short+Term|Long+Term|Net+Use|Net+Conf&chxt=x,y&chs=300x300&cht=r&chco=FF0000&chd=t:" . $fluid2. "," . $processing2. "," . $shortMem2. "," . $longMem2. "," . $intUsage. "," . $crystallized. "," . $fluid2. "&chdlp=l&chg=-1,0,0,4&chls=1.333&chm=B,FF000098,0,0,0&chtt=User+Details\" width=\"300\" height=\"300\" alt=\"User Details\" />";   
 ?>
 <table id="detailstable">
 	<tbody>
 		<tr>
 			<th>Fluid Intelligence</th>
-			<td><input type="text" name="fluid" size="3" value="<?echo $fluid ?>"/></td>
+			<td><input type="text" name="fluid" size="3" value="<?echo $fluid ?>"/>/30</td>
 
 		</tr>
 		
 		<tr>
 			<th>Processing Speed</th>
-			<td><input type="text" name="processing" size="3" value="<?echo $processing ?>"/></td>
+			<td><input type="text" name="processing" size="3" value="<?echo $processing ?>"/>/96</td>
 		</tr>
 		<tr>
 			<th>Short Term Memory</th>
-			<td><input type="text" name="shortmem" size="3" value="<?echo $shortMem ?>"/></td>
+			<td><input type="text" name="shortmem" size="3" value="<?echo $shortMem ?>"/>/14</td>
 		</tr>
 		<tr>
 			<th>Long Term Memory</th>
-			<td><input type="text" name="longmem" size="3" value="<?echo $longMem ?>"/></td>
+			<td><input type="text" name="longmem" size="3" value="<?echo $longMem ?>"/>/20</td>
 		</tr>
 		<tr>
 			<th>Internet Usage</th>
