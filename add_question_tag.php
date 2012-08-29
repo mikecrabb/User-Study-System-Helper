@@ -5,7 +5,7 @@
 <div class="main_content">
 <table id="participanttable">
 	<thead>
-		<th></th><th></th>
+		<th></th>
 		<th>Question</th>
 		<th>Question Website</th>
 		
@@ -20,7 +20,8 @@ while($row = mysql_fetch_array($result))
   	$counter++;
 }		
 ?>
-<th><a href="add_question_tag.php"><img src="images/add.png"></a> </th>
+<th><form name="input" action="add_question_metric.php" method="post">
+<input type="text" name="tag" /><input class="submitbutton2" type="submit" value="Add Tag"/></th>
 </thead><tr> <?
 $result2 = mysql_query("SELECT * FROM questions");
 while($row2 = mysql_fetch_array($result2))	
@@ -30,8 +31,7 @@ while($row2 = mysql_fetch_array($result2))
 	
 	?>
 	<td><? echo $x; ?></td>
-	<td><? echo "<a href=\"delete_tag.php?id=". $question_ID . "&type=4\"><img src=\"images/cross.png\"</a>";?></td>
-	<td><a href="question_information.php?id=<? echo $question_ID; ?>"><? echo $row2['questionText'] ; ?></a></td>
+	<td><a href="participant_details.php?id=<? echo $question_ID; ?>"><? echo $row2['questionText'] ; ?></a></td>
 	<td><? echo $row2['questionWebsite']; ?></td>
 	<?
 	if ($value != 0)
@@ -54,5 +54,5 @@ while($row2 = mysql_fetch_array($result2))
 ?>
 	</tbody>
 </table>
-<p id="lower"><a href="add_question.php">Add Question…</a></p>
+<p id="lower"><a href="new_participant.php">Add Participant...</a></p>
 </div>

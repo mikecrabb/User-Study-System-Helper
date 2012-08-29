@@ -5,7 +5,7 @@
 <div class="main_content">
 <table id="participanttable">
 	<thead>
-		<th></th><th></th>
+		<th></th>
 		<th>Participant Name</th>
 		
 <?
@@ -14,12 +14,13 @@ $counter = 0;
 $x = 1;
 while($row = mysql_fetch_array($result))
 {
-	echo "<th>". $row['data_name'] . "  <a href=\"delete_tag.php?id=". $row['data_ID']  . "&type=1\"><img src=\"images/cross.png\"</a> </th>";
+	echo "<th>". $row['data_name'] . "  <a href=\"delete_tag.php?id=". $row['data_ID']  . "\"><img src=\"images/cross.png\"</a> </th>";
   	$value[$counter] = $row['data_ID'];
   	$counter++;
 }		
 ?>
-<th><a href="add_tag.php"><img src="images/add.png"></a> </th>
+<th><form name="input" action="add_metric.php" method="post">
+<input type="text" name="tag" /><input class="submitbutton2" type="submit" value="Add Tag"/></th>
 </thead><tr> <?
 $result2 = mysql_query("SELECT * FROM participant");
 while($row2 = mysql_fetch_array($result2))	
@@ -28,7 +29,6 @@ while($row2 = mysql_fetch_array($result2))
 	$participant_name = $row2['participant_name'];
 	?>
 	<td><? echo $x; ?></td>
-	<td><? echo "<a href=\"delete_tag.php?id=". $participant_ID  . "&type=3\"><img src=\"images/cross.png\"</a>";?></td>
 	<td><a href="participant_details.php?id=<? echo $participant_ID; ?>"><? echo $row2['participant_name'] ; ?></a></td>
 	<?
 	if ($value != 0)
@@ -51,5 +51,5 @@ while($row2 = mysql_fetch_array($result2))
 ?>
 	</tbody>
 </table>
-<p id="lower"><a href="new_participant.php">Add Participant...</a></p>
+<p id="lower"><a href="new_participant.php">Add Participant…</a></p>
 </div>

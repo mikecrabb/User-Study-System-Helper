@@ -1,6 +1,6 @@
 <?php include ("header.php"); ?>
 <?php include ("db_connect.php"); ?>
-
+<div class="main_content">
 <form name="questionform" action="insert_answers2.php" method="post">
 <div id="details">
 <table id="participanttable">

@@ -156,26 +156,24 @@ if (preg_match("/Passed/", strip_everything($link)))
     	return 0;
 	}
 }
-function get_website_data($tableID)
+function get_website_data($tableID, $characteristicID)
 {
-$result = mysql_query("SELECT * FROM urls WHERE tableid = '" . $tableID . "'");
-while($row = mysql_fetch_array($result))
-{
-$webaddress = $row['url'];
-}
-$result = mysql_query("SELECT * FROM website_characteristics WHERE testableFunction != ''");
-//$result = mysql_query("SELECT * FROM website_characteristics WHERE characteristicName = 'wordsonpage'");
-while($row = mysql_fetch_array($result))
-  {
-  $codetorun = $row['testableFunction'];
-  $charicteristicName = $row['characteristicName'];
-  eval("\$myanswer = $codetorun".";");
-  
-  echo "<td>"; 
-  echo $myanswer;
+	$result = mysql_query("SELECT * FROM urls WHERE tableid = '" . $tableID . "'");
+	while($row = mysql_fetch_array($result))
+	{
+		$webaddress = $row['url'];
+		
+			$resultt = mysql_query("SELECT * FROM website_characteristics WHERE characteristicID = '" . $characteristicID . "'");
 
-echo "</td>";
-  }  
+	while($row = mysql_fetch_array($resultt))
+  	{
+  		$codetorun = $row['testableFunction'];
+  		$charicteristicName = $row['characteristicName'];
+  		eval("\$myanswer = $codetorun".";"); 
+  		return $myanswer;
+  	}  
+	}
+
 }
 
 ?>

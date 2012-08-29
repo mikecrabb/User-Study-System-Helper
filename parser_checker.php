@@ -1,54 +1,84 @@
 <br /><br />
 <form action="" method="post" enctype="multipart/form-data" name="link">
-address<input name="address" type="text" value="" />
-urlid<input name="urlid" type="text" value="" />
+timeout<input name="timeout" type="text" value="" />
 userid<input name="userid" type="text" value="" />
 <input name="Submit" type="Submit" />
 </form>
 <?php
-
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+ini_set('display_errors', '0');
+gc_enable();
 function convert($size)
  {
     $unit=array('b','kb','mb','gb','tb','pb');
     return @round($size/pow(1024,($i=floor(log($size,1024)))),2).' '.$unit[$i];
  }
+ 
+ function get_memory() {
+	$memory_last_line = exec('free',$memory);
+	$memory[1] = str_replace("     ", "-",$memory[1]);
+	$parts = explode(" ",$memory[1]);
+	$parts2 = explode("-",$parts[3]);
+	$mem_percent = $parts2[1] / $parts2[0] * 100;
+	$mem_percent = round($mem_percent);
+	
+	return $mem_percent;
+	}
+
+
 
 if (isset($_POST['Submit'])) {
 
 include ("parser.php");
 include ("db_connect.php");
-$link=$_POST["address"];
-$webaddress=$_POST["address"];
-$urlID=$_POST["urlid"];
+
+$timeout=$_POST["timeout"];
 $userID=$_POST["userid"];
 $websiteno=0;
 
-set_time_limit (120);
 echo "<h1>User ".$userID."</h1>";
-$resultz = mysql_query("SELECT * FROM urls WHERE userID = '". $userID ."' and url NOT LIKE '%mcmanus%'");
-  echo "<table border = 1>";
-  echo "<th>WebsiteNumber</th><th>Memory</th><th>Web Address</th><th>sitemap</th><th>valid html</th><th>readability</th><th>searchbox</th><th>sop</th><th>wop</th><th>tot_syl</th><th>wps</th><th>sypw</th><th>divs</th><th>images</th><th>links</th><th>linkdens</th><th>access</th>";
+  set_time_limit($timeout);
+  $webnumber = 0;
+  $rowsdone = 0;
+$resultz = mysql_query("SELECT * FROM urls WHERE userID = '". $userID ."' and url NOT LIKE '%mcmanus%' and url NOT LIKE '%wikipedia%'");
+//$resultz = mysql_query("SELECT * FROM urls WHERE userID = '". $userID ."' ");
+
+$numberofrows = mysql_num_rows($resultz);
+echo "<h3>" . $numberofrows . "</h3>"; 
+
+//$resultz = mysql_query("SELECT * FROM urls WHERE tableid = '3'");
 while($row = mysql_fetch_array($resultz))
-  {
-  $url = $row['url'];
-  $tableid = $row['tableid'];
-  $websiteno++;
+	{
+	  	$url = $row['url'];
+	  	$tableid = $row['tableid'];
+	  	
+		$result3 = mysql_query("SELECT * FROM website_characteristics WHERE testableFunction != ''");
+		//$result3 = mysql_query("SELECT * FROM website_characteristics WHERE characteristicID= '7'");
+		while($row = mysql_fetch_array($result3))
+		{
+			$characteristicID = $row['characteristicID'];
+			$characteristicName = $row['characteristicName'];
+			$characteristicValue = get_website_data($tableid, $characteristicID);
+			
+				mysql_query("INSERT INTO page_characteristics ( characteristicID, characteristicValue, tableid) VALUES ('" . $characteristicID . "', '" . $characteristicValue . "', '" . $tableid . "')") ;
+				
+				echo $webnumber . " " . $characteristicID . " " . $characteristicName . " " . $characteristicValue . " " . $tableid . "".$url;
+				//echo $characteristicName . " = " . $characteristicValue ."<br/>";
+				$webnumber++;
+						flush();
+		ob_flush();	
+		}
+	$rowsdone++;
+	echo "<h4>" .$rowsdone. "/" . $numberofrows . " - Memory at ".get_memory()."%</h4>";
+	//echo " ---NEXT--- ";
+  	kill_dom();
+  	gc_collect_cycles();
+	}
+}
 
-  echo "<tr><td>" . $websiteno . "</td>";
-    echo "<td>" . convert(memory_get_usage(true)) . "</td>";
-  echo "<td>" . $url . "</td>";
-  get_website_data($tableid);
-  kill_dom();
-  gc_collect_cycles();
-  echo "</tr>";
-  }  
-echo "</table>";
-get_website_data($urlID);
+/*
 
-
-
-
-		echo "You are looking at ". $link. "<br/>";
+		?> "You are looking at <? echo $link; ?> <br/>; <?
 		
 		echo "<h3>Reading Information</h3>";
 		
@@ -83,6 +113,5 @@ get_website_data($urlID);
         echo "Accessibility mention rating is " . accessibility_mention($webaddress) . "</br>";
         
         echo "Page Valid rating is " . check_valid($webaddress) . "</br>";
-
-}
+*/
 ?>

@@ -20,7 +20,7 @@ else
   	{ ?>
   	<? $qID= $row['qID']; ?>
   			<h1><? echo $row['question']; ?><h1>
-  			<h2><? echo $row['website']; ?><h2>
+  			<h2><a href="http://<? echo $row['website']; ?>" target="_blank"> <? echo $row['website']; ?></a><h2>
   			<? mysql_query("INSERT INTO studyTimestamps ( userID, questionID, timestamp, stampType) VALUES ('" . $userID . "', '" . $qID . "', '" . time() . "', 'popup')") ; ?>
 	<? } 
 	

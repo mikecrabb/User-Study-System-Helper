@@ -147,14 +147,14 @@ function drawVisualization() {
   new google.visualization.ColumnChart(document.getElementById('previsit')).
       draw(data,
            {title:"Pre Visit Questions",
-            width:300, height:200, vAxis: {minValue:0, maxValue:100},
+            width:600, height:200, vAxis: {minValue:0, maxValue:100},
             hAxis: {title: " "}}
       );
 }
 
       google.setOnLoadCallback(drawVisualization);
     </script>    
-    <div id="previsit" style="width: 300px; height: 200px;"></div>
+    <div id="previsit" style="width: 600px; height: 200px;"></div>
 
 <div id="infobox">
 <h4>This question has been answered <strong><? echo $questionanswers; ?></strong> times</h4>
@@ -183,7 +183,7 @@ function drawVisualization() {
   new google.visualization.ColumnChart(document.getElementById('disorientation')).
       draw(data,
            {title:"Disorientation",
-            width:433, height:200, vAxis: {minValue:0, maxValue:100},
+            width:600, height:200, vAxis: {minValue:0, maxValue:100},
             hAxis: {title: " "}}
       );
 }
@@ -191,7 +191,7 @@ function drawVisualization() {
       google.setOnLoadCallback(drawVisualization);
     </script>
 
-<div id="disorientation" style="width: 433px; height: 200px;"></div>
+<div id="disorientation" style="width: 600px; height: 200px;"></div>
     
 <script type="text/javascript">
 function drawVisualization() {
@@ -208,14 +208,14 @@ function drawVisualization() {
   new google.visualization.ColumnChart(document.getElementById('disorientation_rc')).
       draw(data,
            {title:"Disorientation - Reverse Coded",
-            width:198, height:200, vAxis: {minValue:0, maxValue:100},
+            width:600, height:200, vAxis: {minValue:0, maxValue:100},
             hAxis: {title: " "}}
       );
 }
 
       google.setOnLoadCallback(drawVisualization);
     </script>    
-<div id="disorientation_rc" style="width: 198px; height: 200px;"></div>     
+<div id="disorientation_rc" style="width: 600px; height: 200px;"></div>     
 <script type="text/javascript">
 function drawVisualization() {
   // Create and populate the data table.
@@ -234,12 +234,12 @@ function drawVisualization() {
   new google.visualization.ColumnChart(document.getElementById('easeofuse')).
       draw(data,
            {title:"Ease of Use",
-            width:650, height:200, vAxis: {minValue:0, maxValue:100},
+            width:600, height:200, vAxis: {minValue:0, maxValue:100},
             hAxis: {title: " "}}
       );
 }
 
       google.setOnLoadCallback(drawVisualization);
     </script>   
-    <div id="easeofuse" style="width: 650px; height: 200px;"></div>
+    <div id="easeofuse" style="width: 600px; height: 200px;"></div>
     

@@ -3,7 +3,7 @@
 <? $userID=$_POST["userID"] ?>
 <? $nextq=$_POST["nextq"] ?>
 <? $switcher=$_POST["switcher"] ?>
-
+<div class="main_content">
 <?
 $x=1; //this probably does nothing, but I'm leaving it in just in case I've done something stupid
 
@@ -90,6 +90,7 @@ case 3:
 }
 ?>
 
+
 <h2>Study In Progress</h2>
 	<? $result = mysql_query("SELECT questions.questionID as qID, questions.questionWebsite as website, questions.questionText as question, questionOrder.userID, questionOrder.questionOrderID as qoID, questionOrder.orderID as oID FROM questions, questionOrder WHERE questions.questionID = questionOrder.questionID AND userID = '".$userID."' AND questionOrder.orderID = '".$nextq."'");
 
@@ -98,6 +99,7 @@ case 3:
   <h3>Current Question (No.<? echo $nextq; ?>) (Q.<? echo $row['qID']; ?>)</h3>
   <p><? echo $row['question']; ?></p>
   <p><? echo $row['website']; ?></p>
+  <p> UserID: <? echo $userID; ?></p>
 <? } ?>
 
 
@@ -148,3 +150,4 @@ case 3:
   </td>
 </tr>
 </table>
+</div>

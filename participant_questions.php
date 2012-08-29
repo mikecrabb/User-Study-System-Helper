@@ -22,10 +22,12 @@ while($row = mysql_fetch_array($result))
 		<tr>
 			<td width ="10%"><? echo $qID ; ?></td>
 			<?
+			/* This bit needs fixed, not sure what it does?
 			$result2 = mysql_query("SELECT * FROM questionnaires where userID = '".$userID ."'AND questionID = '" . $qID . "'");
 			$row = mysql_fetch_array($result2); 
 			$num_results = mysql_num_rows($result2); 
-			//echo $num_results;
+			echo $num_results;
+			END OF FIX */
 			if ($num_results > 0)
 			{ 
 			?> <td width ="2%"><a href="participant_details.php?id=<? echo $userID; ?>&qID=<? echo $qID; ?>"><img src="images/info2.png"></a></td> <?
@@ -63,6 +65,6 @@ while($row = mysql_fetch_array($result))
 </select>
 <input type="hidden" name="userID" value="<? echo $userID ?>">
 <input type="hidden" name="orderID" value="<? echo $nextquestionorder ?>">
-<input type="submit" class="submitbutton" value="Add Question">
+<input type="submit" class="submitbutton2" value="Add Question">
 
 </form>

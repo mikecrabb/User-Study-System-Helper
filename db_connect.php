@@ -1,13 +1,13 @@
 <?php 
 //MySQL Configuration
 //DB Host (Normally 'localhost')
-$dbhost = 'xxx';
+$dbhost = 'localhost';
 //DB Database Username
-$dbusername = 'xxx';
+$dbusername = 'finaltest';
 //DB Database User Password
-$dbpassword = 'xxx';
+$dbpassword = 'zDBDtBGxGEvCQd9X';
 //DB Database Name
-$dbname = 'xxx';
+$dbname = 'finaltest';
 //mysql_connect function
 $conn=mysql_connect($dbhost, $dbusername, $dbpassword);
 if(!$conn) :

@@ -5,7 +5,7 @@ unset($_SESSION['username']);
 include ("db_connect.php");
 
 //Initialise all variables
-$checker=0;
+$checker=1;
 
 //SQL injection protect fields
 $password = mysql_real_escape_string($_POST["password"]);

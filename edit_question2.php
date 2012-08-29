@@ -1,58 +1,42 @@
 <?php
 $questionID= $_POST["questionNumber"];
-$qt= $_POST["questionText"];
-$qw= $_POST["questionWebsite"];
-$pn= $_POST["primaryNavigation"];
-$sn= $_POST["secondaryNavigation"];
-$np= $_POST["navPlacement"];
-$nc= $_POST["navStructure"];
-$sm= $_POST["sitemap"];
-$searchbox= $_POST["searchbox"];
-$bc= $_POST["breadcrumbs"];
-$fk= $_POST["fleshkincaid"];
-$wh= $_POST["validhtml"];
-$wc= $_POST["validcss"];
-$sop= $_POST["sentenceonpage"];
-$wop= $_POST["wordsonpage"];
-$sop2= $_POST["syllablesonpage"];
-$wps= $_POST["wordspersentence"];
-$spw= $_POST["syllablesperword"];
-  $divs = $_POST['divs'];
-  $images = $_POST['images'];
-  $links = $_POST['links'];
-  $linkdensity = $_POST['linkdensity'];
-  $accessibilitymention = $_POST['accessibilitymention'];
+$questionText= $_POST["questionText"];
+$questionWebsite= $_POST["questionWebsite"];
+
 
 include ("db_connect.php");
 
-mysql_query("UPDATE questions SET questionWebsite= '" . $qw . "',
-syllablesperword= '" . $spw . "',
-sentenceonpage= '" . $sop . "',
-wordsonpage= '" . $wop . "',
-syllablesonpage= '" . $sop2 . "',
-wordspersentence= '" . $wps . "',
-questionText='" . $qt . "',
-primaryNavigation='" . $pn . "',
-secondaryNavigation='" . $sn . "',
-navPlacement='" . $np . "',
-navStructure='" . $nc . "',
-siteMap='" . $sm . "',
-breadcrumbs='" . $bc . "',
-w3cvalidhtml='" . $wh . "',
-w3cvalidcss='" . $wc . "',
-fleshkincaid='" . $fk . "',
-searchbox='" . $searchbox . "',
-divs='" . $divs . "',
-images='" . $images . "',
-links='" . $links . "',
-linkdensity='" . $linkdensity . "',
-accessibilitymention='" . $accessibilitymention . "'
+mysql_query("UPDATE questions SET questionWebsite= '" . $questionWebsite . "',
+questionText='" . $questionText . "'
 WHERE questionID = '" . $questionID . "'");
 
+$result = mysql_query("SELECT * FROM question_data");
+while($row = mysql_fetch_array($result))
+{
+  	$value[$counter] = $row['q_data_ID'];
+  	$counter++;
+}
 
-$URL="question_information.php?qno=". $questionID;
+
+foreach($value as $test)
+{
+	$test2 = "\$_POST[\"".$test."\"]";
+	eval("\$test3 = $test2".";");
+	
+	$checker = 0;
+	$result = mysql_query("SELECT * FROM question_data_information where q_data_ID='" . $test . "' AND question_ID = '" . $questionID . "'");
+	while($row = mysql_fetch_array($result))
+	{
+		mysql_query("UPDATE question_data_information SET q_data_value='" . $test3 . "' WHERE q_data_ID='" . $test . "' AND question_ID = '" . $questionID . "'");
+		$checker = 1; 
+	}
+	if ($checker==0)
+	{
+		mysql_query("INSERT INTO question_data_information (q_data_value, q_data_ID, question_ID) VALUES ('" . $test3 . "','" . $test . "', '" . $questionID . "'   )");
+	}
+}
+
+$URL="question_information.php?id=". $questionID;
 
 header ("Location: $URL");
 ?>
-
-

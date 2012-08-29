@@ -2,7 +2,7 @@
 <?php include ("db_connect.php"); ?>
 <? $userID=0; ?>
 <? $userID=$_GET["id"] ?>
-
+<div class="main_content">
 <?php
 if ($userID==0)
 { ?>
@@ -41,5 +41,5 @@ while($row = mysql_fetch_array($result))
 <? } 
 }
 ?>
-
+</div>
 

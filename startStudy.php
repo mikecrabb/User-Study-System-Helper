@@ -2,7 +2,7 @@
 <?php include ("db_connect.php"); ?>
 <? $userID=$_POST["userID"] ?>
 <? $nextq=0; ?>
-
+<div class="main_content">
 <?
 if ($nextq=="0")
 {
@@ -25,3 +25,4 @@ if ($nextq=="0")
 <?
 }
 ?>
+</div>
